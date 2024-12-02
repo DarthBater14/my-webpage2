@@ -1,24 +1,23 @@
-
-// Define a template using Mustache.js
 var template = `
     <ul>
-        {{#data}}
-        <li>Name: {{name}}, Age: {{age}}, City: {{city}}</li>
-        {{/data}}
+        {{#books}}
+        <li>
+            <span><strong>Title:</strong> {{title}}</span>
+            <span><strong>Author:</strong> {{author}}</span>
+            <span><strong>Price:</strong> {{price}}</span>
+        </li>
+        {{/books}}
     </ul>
 `;
 
-// Get the 'output' div element
-var output = document.getElementById('output');
+var output = document.getElementById('book-list');
 
-// Fetch JSON data from the file
-fetch('data.json')
+fetch('books.json')
     .then(function(response) {
         return response.json();
     })
     .then(function(data) {
-        // Render the data using the template
-        var rendered = Mustache.render(template, { data: data });
+        var rendered = Mustache.render(template, { books: data });
         output.innerHTML = rendered;
     })
     .catch(function(error) {
